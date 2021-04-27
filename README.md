@@ -2,6 +2,9 @@
 
 Setup vnstat and vnstati so we can generate picture graphs every X minute for monitor our webservers bandwidth
 
+
+### Preview
+
 ![Screenshot](.preview/main.png)
 
 ### Install vnstat/vnstad/vnstati
