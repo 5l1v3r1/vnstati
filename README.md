@@ -1,13 +1,12 @@
 # vnstati
 
-Setup vnstat and vnstati so we can generate picture graphs every X minute for monitor our webservers bandwidth
+Setup vnstat and vnstati so we can generate picture graphs every X minute for monitor your server bandwidth
 
-
-### Preview
+# Preview
 
 ![Screenshot](.preview/main.png)
 
-### Install vnstat/vnstad/vnstati
+# Install vnstat/vnstad/vnstati
 
     emerge --ask vnstat
     vim ./vnstatd
@@ -15,28 +14,30 @@ Setup vnstat and vnstati so we can generate picture graphs every X minute for mo
     cp vnstad /etc/conf.d/
     cp vnstat.conf /etc/
 
-### Web server
+# Web server
 
-Edit 'vnstati-generate.sh' and set correct nic under interface
+- Edit 'vnstati-generate.sh' - Set active network interfrace under interface, use below command for print active nic:
 
-Add below line to cronie:
+      ip addr | awk '/state UP/ {print $2}' | sed 's/.$//'
 
-    0 * * * * /path/vnstati-generate.sh
+- Add below line to cronie:
 
-Create a folder in your webroot and copy index.html into it:
+      0 * * * * /path/vnstati-generate.sh
 
-    mkdir -p /var/www/localhost/htdocs/vnstati
-    cp index.html /var/www/localhost/htdocs/vnstati
+- Create a folder in your webroot and copy index.html into it:
 
-Test script by execute:
+      mkdir -p /var/www/localhost/htdocs/vnstati
+      cp ./index.html /var/www/localhost/htdocs/vnstati/
 
-    bash /var/www/localhost/htdocs/vnstati
+- Execute script manually for create your pictures:
 
-Browse to http://server/vnstati
+      bash /var/www/localhost/htdocs/vnstati
+
+- Browse to http://server/vnstati
 
 #### REQUIREMENTS
 
-A webserver and a linux enviroment :) 
+A webserver and a linux enviroment with prefered webserver :) 
 
 #### CONTACT 
 
