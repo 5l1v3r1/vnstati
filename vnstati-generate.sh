@@ -18,7 +18,7 @@
 ###########################o###################################################
 ###############################################################################
 ####                                                                       ####
-####  Copyright (C) 2018-2020, wuseman                                     ####
+####  Copyright (C) 2018-2021, wuseman                                     ####
 ####                                                                       ####
 ####  This program is free software; you can redistribute it and/or modify ####
 ####  it under the terms of the GNU General Public License as published by ####
