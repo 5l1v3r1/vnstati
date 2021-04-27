@@ -11,6 +11,8 @@ Setup vnstat and vnstati so we can generate picture graphs every X minute for mo
 ### Gentoo
 
     emerge --ask vnstat
+    git clone https://github.com/wuseman/vnstati
+    cd ./vnstati
     vim ./vnstatd
     vim ./vnstat.conf
     cp vnstad /etc/conf.d/
