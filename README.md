@@ -24,9 +24,9 @@ Setup vnstat and vnstati so we can generate picture graphs every X minute for mo
 
       ip addr | awk '/state UP/ {print $2}' | sed 's/.$//'
 
-- Add below line to cronie:
+- Add below line to cronie: (will execute script every 5 minutes)
 
-      0 * * * * /path/vnstati-generate.sh
+      */5 * * * * /path/vnstati-generate.sh
 
 - Create a folder in your webroot and copy index.html into it:
 
