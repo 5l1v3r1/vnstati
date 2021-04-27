@@ -1,0 +1,6 @@
+# /etc/conf.d/vnstatd: config file for /etc/init.d/vnstatd
+
+VNSTATD_CONFIGFILE="/etc/vnstat.conf"
+VNSTATD_PIDFILE="/run/vnstat/vnstatd.pid"
+VNSTATD_OPTS=""
+SSD_STARTWAIT=500
