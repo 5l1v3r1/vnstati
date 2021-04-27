@@ -14,7 +14,7 @@ Setup vnstat and vnstati so we can generate picture graphs every X minute for mo
     cp vnstad /etc/conf.d/
     cp vnstat.conf /etc/
 
-# Web server
+# On Server:
 
 - Edit 'vnstati-generate.sh' - Set active network interfrace under interface, use below command for print active nic:
 
