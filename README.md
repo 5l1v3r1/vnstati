@@ -8,13 +8,15 @@ Setup vnstat and vnstati so we can generate picture graphs every X minute for mo
 
 # Install vnstat/vnstad/vnstati
 
+### Gentoo
+
     emerge --ask vnstat
     vim ./vnstatd
     vim ./vnstat.conf
     cp vnstad /etc/conf.d/
     cp vnstat.conf /etc/
 
-# On Server:
+# Server:
 
 - Edit 'vnstati-generate.sh' - Set active network interfrace under interface, use below command for print active nic:
 
