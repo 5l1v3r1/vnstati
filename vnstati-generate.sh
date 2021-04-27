@@ -40,29 +40,69 @@
 ###############################################################################
 ### Last Modified: 04:09:15 - 2021-04-27
 
-# Interaface (Default interaface)
+# Interface (Default interface)
 INTERFACE="enp0s25"
+# INTERFACE="ip addr|awk '/state UP/ {print $2}'|sed 's/.$//'" # Set interface for us, works flawless on Gentoo enviroments, no idea about other creappy distros.
 
-# Create vnstat dir
-mkdir -p /tmp/vnstat
+# vnstati binary
+VNSTATI="/usr/bin/vnstati"
 
-# Change owner of /tmp/vnstat path
-chown -R vnstat:vnstat /tmp/vnstat
+# Storage path
+PATH="/tmp/vnstat/"
+
+# Filenames
+FILENAME="vnstat-"
+
+# Create '/tmp/vnstat' if the directory does not exist
+check_paths() {
+       [[ ! -d "/tmp/vnstat" ]] && mkdir /tmp/vnstat
+}
+
+# Check permissions on our /tmp/vnstat dir
+check_permissions() {
+    vnstatOwner="$(stat -c '%U:%G' /tmp/vnstat/)"
+    [[ $vnstatOwner != "vnstat:vnstat" ]] && chown -R vnstat:vnstat /tmp/vnstat/
+}
+
+# Check if root is executing the script
+check_root() {
+      (( ${EUID} > 0 )) && printf "%s\n" "$basename$0: internal error -- root privileges is required for this script" && exit 1
+  }
+
+# - NOTICE FOR CRONIE FUNCTION
+# -
+# Lets skip this part for public script until later, lazy cow
+# -
+#check_cronie() {
+#    if [[ $(crontab -l | grep -iq "vnstat"; echo $?) == 1 ]]; then
+#        set -f
+#        echo $(crontab -l ; echo '0 * * * * /path/vnstati-generate.sh') | crontab -
+#       set +f
+#     fi
+#}
+
+check_paths
+check_permission
+check_root
 
 ##########################################################
-# # VNSTAT                                            ####
+# yay, now vnstati will do the real real job          ####
 ##########################################################
-# Summary
-vnstati -s -i $INTERFACE -o /tmp/vnstat/vnstat-summary.png
 
-# Top Days
-vnstati -m -i $INTERFACE -o /tmp/vnstat/vnstat-top-days.png
+### Bandwidth Summary
+${VNSTATI} -s -i $INTERFACE -o ${PATH}/${FILENAME}-summary.png              # Summary for our nic
 
-# Stats
-vnstati -5 -i $INTERFACE -o /tmp/vnstat/vnstat-fiveminutes.png
-vnstati -h -i $INTERFACE -o /tmp/vnstat/vnstat-hourly.png
-vnstati -hg -i $INTERFACE -o /tmp/vnstat/vnstat-hourly-graph.png
-vnstati -d -i $INTERFACE -o /tmp/vnstat/vnstat-daily.png
-vnstati -m -i $INTERFACE -o /tmp/vnstat/vnstat-monthly.png
-vnstati -y -i $INTERFACE -o /tmp/vnstat/vnstat-yearly.png
+# Bandwidth - Top Days
+${VNSTATI} -m -i $INTERFACE -o ${PATH}/${FILENAME}-top-days.png             # Sort top days at top (this will show the days you used most banwidth for your server, sorted by 5)
+
+# Bandwidth stats for: Realtime/Hourly/Daily/Monthly/Yearly
+${VNSTATI} -5  -i $INTERFACE -o ${PATH}/${FILENAME}-fiveminutes.png         # Output 5 minutes
+${VNSTATI} -h  -i $INTERFACE -o ${PATH}/${FILENAME}-hourly.png              # Hourly
+${VNSTATI} -hg -i $INTERFACE -o ${PATH}/${FILENAME}-hourly-graph.png        # Hourly Graph 
+${VNSTATI} -d  -i $INTERFACE -o ${PATH}/${FILENAME}-daily.png               # Daily
+${VNSTATI} -m  -i $INTERFACE -o ${PATH}/${FILENAME}-monthly.png             # Monthly
+${VNSTATI} -y  -i $INTERFACE -o ${PATH}/${FILENAME}-yearly.png              # Yearly
+
+
+
 
