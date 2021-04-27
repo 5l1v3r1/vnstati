@@ -1,6 +1,6 @@
 # VNStati
 
-Setup vnstat and vnstati so we can generate picture graphs every X minute for monitor your server bandwidth
+Setup vnstat and vnstati so we can generate picture graphs every X minute for monitor our server bandwidth
 
 # Preview
 
