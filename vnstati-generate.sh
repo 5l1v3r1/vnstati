@@ -42,7 +42,6 @@
 
 # Interface (Default interface)
 INTERFACE="enp0s25"
-# INTERFACE="ip addr|awk '/state UP/ {print $2}'|sed 's/.$//'" # Set interface for us, works flawless on Gentoo enviroments, no idea about other creappy distros.
 
 # vnstati binary
 VNSTATI="/usr/bin/vnstati"
