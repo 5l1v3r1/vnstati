@@ -83,7 +83,7 @@ check_root() {
 #check_cronie() {
 #    if [[ $(crontab -l | grep -iq "vnstat"; echo $?) == 1 ]]; then
 #        set -f
-#        echo $(crontab -l ; echo '0 * * * * /path/vnstati-generate.sh') | crontab -
+#        echo $(crontab -l ; echo '*/5 * * * * /path/vnstati-generate.sh') | crontab -
 #       set +f
 #     fi
 #}
