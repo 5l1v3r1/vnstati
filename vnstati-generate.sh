@@ -41,24 +41,24 @@
 ### Last Modified: 04:09:15 - 2021-04-27
 
 # Interface (Default interface)
-INTERFACE="enp0s25"
+INTERFACE="eno1"
 
 # vnstati binary
 VNSTATI="/usr/bin/vnstati"
 
 # Storage path
-PATH="/tmp/vnstat/"
+PATH="/var/www/html/site2/wuseman/vnstati"
 
 # Filenames
-FILENAME="vnstat-"
+FILENAME="vnstat"
 
 # Check for requirement packages before we doing anything else
-check_requirements() {
-for requirements in crontab vnstat vnstati vnstatd; do 
-    hash "$requirements" &>/dev/null || \
-                 echo "$requirements is required to be installed, exiting..." ; exit 1
-done 
-}
+#check_requirements() {
+#for requirements in crontab vnstat vnstati vnstatd; do 
+#    hash "$requirements" &>/dev/null || \
+#                 echo "$requirements is required to be installed, exiting..." ; exit 1
+#done 
+#}
 
 # Create '/tmp/vnstat' if the directory does not exist
 check_paths() {
@@ -88,10 +88,10 @@ check_root() {
 #     fi
 #}
 
-check_requirements
-check_paths
-check_permission
-check_root
+#check_requirements
+#check_paths
+#check_permission
+#check_root
 
 ##########################################################
 # yay, now vnstati will do the real real job          ####
