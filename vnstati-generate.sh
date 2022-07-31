@@ -47,7 +47,7 @@ INTERFACE="eno1"
 VNSTATI="/usr/bin/vnstati"
 
 # Storage path
-PATH="/var/www/html/site2/wuseman/vnstati"
+PATH="/var/www/html/wuseman/vnstati"
 
 # Filenames
 FILENAME="vnstat"
